@@ -1,0 +1,43 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<h2 class="text-center font-italics">My Orders</h2>
+
+{% for i in order %}
+<div class="jumbotron row">
+    <div class="col">
+        <img height="300px" width="100%" src="{{i.cart.product.image.url}}" alt="">
+    </div>
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item"><b>Name</b> : {{i.cart.product.name}}</li>
+            <li class="list-group-item"><b>Price</b> : RS {{i.cart.product.price}}</li>
+            <li class="list-group-item"><b>Quntity</b> : {{i.cart.quantity}}</li>
+            <li class="list-group-item"><b>Order Placed Date</b> : {{i.date}}</li>
+            <li class="list-group-item"><b>Total Amount To Pay</b> : {{i.cart.totalamnt}}</li>
+            <li class="list-group-item">
+               {% if i.status == 'Delivered' %}
+               <p class="text-success">{{i.status}}</p>
+               {%endif%}
+               {% if i.status == 'Out For Delivery' %}
+               <p class="text-warning">{{i.status}}</p>
+               {%endif%}
+               {% if i.status == 'Cancelled' %}
+               <p class="text-danger">{{i.status}}</p>
+               {%endif%}
+               {% if i.status == 'Order Placed' %}
+               <p class="text-info">{{i.status}}</p>
+               <a href="{% url 'corder' i.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Cancel Order</a>
+               {%endif%}
+               {% if i.status == 'Shipped' %}
+               <p class="text-info">{{i.status}}</p>
+               <a href="{% url 'corder' i.id %}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Cancel Order</a>
+               {%endif%}
+            </li>
+        </ul>
+    </div>
+</div>
+{%endfor%}
+
+
+
+{% endblock content %}

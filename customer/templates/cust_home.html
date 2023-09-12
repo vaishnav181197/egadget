@@ -1,0 +1,52 @@
+{% extends 'navbar.html' %}
+{% block content %}
+  <!-- <h1>Customer</h1>
+    
+      {% for i in products %}
+        <p>{{i.name}}</p>
+      {%endfor%} -->
+  <h1 class="bg-info font-italic">
+    <span class="material-symbols-outlined">
+      phone_android
+    </span>
+    e-GADGETS
+  </h1>
+  {% if messages %}
+  {% for i in messages %}
+  {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+  <div class="alert alert-success">
+    {{i}}
+  </div>
+  {%endif%}
+  {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+  <div class="alert alert-danger">
+    {{i}}
+  </div>
+  {%endif%}
+  {%endfor%}
+
+  {%endif%}
+  <h3>WELCOME. <i> {{request.user.first_name}} {{request.user.last_name}}</i></h3>
+
+  <div class="row">
+    {% for i in products %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" height="300px" width="300px" src="{{i.image.url}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{i.name}}</h5>
+        <p class="card-text">{{i.category}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <!-- <li class="list-group-item"></li> -->
+        <!-- <li class="list-group-item">{{i.description}}</li> -->
+        <!-- <li class="list-group-item">RS:{{i.price}}</li> -->
+      </ul>
+      <div class="card-body">
+        <a href="{% url 'pdet' i.id %}" class="card-link btn btn-warning">View More</a>
+        <!-- <a href="#" class="card-link">Another link</a> -->
+      </div>
+    </div>
+    {%endfor%}
+
+  </div>
+  {% endblock content %}

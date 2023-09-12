@@ -1,0 +1,51 @@
+{% extends 'navbar.html' %}
+{% block content %}
+  <h1 class="bg-success">Product detail</h1>
+
+  <div class="row">
+    <div class="col-5">
+      <img src="{{data.image.url}}" alt="img" width="100%" height="450px">
+    </div>
+    <div class="col">
+      <ul class="list-group jumbotron">
+        <li class="list-group-item">{{data.name}}</li>
+        <li class="list-group-item">{{data.category}}</li>
+        <li class="list-group-item">{{data.price}}</li>
+        <li class="list-group-item">{{data.description}}</li>
+        <li class="list-group-item">
+          <a href="" class="btn btn-success">Buy Now</a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <span class="material-symbols-outlined">
+              add_shopping_cart
+            </span> </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add to Cart</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'acart' data.id %}" method="post">
+            {%csrf_token%}
+            <label for="">Add Quantity</label>
+            <input type="number" name="qnt" class="form-control" id="">
+            <button class="btn btn-success">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
